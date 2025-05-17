@@ -59,16 +59,13 @@ Este repositorio está diseñado para practicar Pull Requests en GitHub. Cada eq
 
 4. Una vez terminada y revisada la nueva característica del proyecto (lanzando servidor y tests), realizar la Pull Request pertinente apuntando a la rama dev del repositorio original.
 
-### Funcionalidades a implementar (ejercicio por grupos):
+### Funcionalidades a implementar:
 
 #### Grupo 1: Filtro por edad mínima en el endpoint `/candidates/`
 
 **Objetivo:** Permitir filtrar candidatos por edad mínima.
 
-**Pista:**
-
-```
-python
+```python
 # router/candidates.py
 @router.get("/", response_model=List[Candidate])
 async def get_candidates(
@@ -84,10 +81,7 @@ async def get_candidates(
 
 **Objetivo:** Mostrar los 3 candidatos con más votos ficticios.
 
-**Pista:**
-
-```
-python
+```python
 # router/candidates.py
 @router.get("/top-votes", response_model=List[Candidate])
 async def get_top_candidates():
@@ -100,10 +94,7 @@ async def get_top_candidates():
 
 **Objetivo:** Añadir una cita representativa.
 
-**Pista:**
-
-```
-python
+```python
 # schemas/candidate.py
 class CandidateBase(BaseModel):
     ...
@@ -116,10 +107,7 @@ class CandidateBase(BaseModel):
 
 **Objetivo:** Permitir filtrar por candidatos con alto presupuesto de campaña.
 
-**Pista:**
-
-```
-python
+```python
 # router/candidates.py
 @router.get("/", ...)
 async def get_candidates(
@@ -135,10 +123,7 @@ async def get_candidates(
 
 **Objetivo:** Agregar un índice calculado entre populism y edad (por diversión).
 
-**Pista:**
-
-```
-python
+```python
 # schemas/candidate.py
 class Candidate(CandidateBase):
     id: int
@@ -156,10 +141,7 @@ class Candidate(CandidateBase):
 
 **Objetivo:** Devolver un candidato aleatorio.
 
-**Pista:**
-
-```
-python
+```python
 # router/candidates.py
 @router.get("/", ...)
 import random
