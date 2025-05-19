@@ -32,9 +32,12 @@ class CandidateUpdate(BaseModel):
     age: Optional[int] = Field(None, ge=18, le=120)
     campaign_budget: Optional[float] = Field(None, ge=0)
 
+# schemas/candidate.py
 class Candidate(CandidateBase):
     id: int
     created_at: datetime
-    
-    class Config:
-        from_attributes = True
+    absurdity_index: float
+
+    @property
+    def absurdity_index(self):
+        return round(self.populism_level / (self.age or 1), 2)      
