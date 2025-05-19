@@ -116,3 +116,8 @@ async def get_populism_stats():
         "min_populism": min(populism_levels),
         "total_candidates": len(candidates)
     }
+@router.get("/top-votes", response_model=List[Candidate])
+async def get_top_candidates():
+    candidates = db.get_candidates()
+    sorted_candidates = sorted(candidates, key=lambda c: c.fictional_votes, reverse=True)
+    return sorted_candidates[:3]
