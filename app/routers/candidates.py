@@ -11,13 +11,12 @@ router = APIRouter(
     responses={404: {"description": "Not found"}},
 )
 
-@router.get("/", response_model=List[Candidate])
-async def get_candidates(
-    name: Optional[str] = Query(None, description="Filtrar por nombre"),
-    party: Optional[str] = Query(None, description="Filtrar por partido político"),
-    min_populism: Optional[int] = Query(None, ge=0, le=100, description="Nivel mínimo de populismo"),
-    max_populism: Optional[int] = Query(None, ge=0, le=100, description="Nivel máximo de populismo")
-):
+
+@router.get("/top-votes", response_model=List[Candidate])
+async def get_top_candidates():
+    candidates = db.get_candidates()
+    sorted_candidates = sorted(candidates, key=lambda c: c.fictional_votes, reverse=True)
+    return sorted_candidates[:3]
     """
     Obtiene la lista de todos los candidatos absurdos.
     Se pueden aplicar filtros opcionales.
