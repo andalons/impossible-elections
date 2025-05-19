@@ -20,7 +20,8 @@ class Database:
                 "fictional_votes": 42000,
                 "slogan": "To infinity and beyond taxes!",
                 "age": 45,
-                "campaign_budget": 3000000.0
+                "campaign_budget": 3000000.0,
+                "vice_name": "Admiral Nebula"
             },
             {
                 "name": "Lady Naps-A-Lot",
@@ -30,7 +31,8 @@ class Database:
                 "fictional_votes": 56000,
                 "slogan": "A pillow in every office!",
                 "age": 39,
-                "campaign_budget": 1500000.0
+                "campaign_budget": 1500000.0,
+                "vice_name": "Sir Snooze"
             },
             {
                 "name": "Professor Meme",
@@ -40,7 +42,8 @@ class Database:
                 "fictional_votes": 38000,
                 "slogan": "Such leadership. Very democracy. Wow.",
                 "age": 33,
-                "campaign_budget": 750000.0
+                "campaign_budget": 750000.0,
+                "vice_name": "Doge McVice"
             }
         ]
         
@@ -53,12 +56,13 @@ class Database:
                 fictional_votes=candidate_data["fictional_votes"],
                 slogan=candidate_data["slogan"],
                 age=candidate_data["age"],
-                campaign_budget=candidate_data["campaign_budget"]
+                campaign_budget=candidate_data["campaign_budget"], 
+                vice_name=candidate_data["vice_name"] 
             )
     
     def add_candidate(self, name: str, party: str, main_proposal: str, 
                      populism_level: int, fictional_votes: int, slogan: str, 
-                     age: int, campaign_budget: float) -> CandidateModel:
+                     age: int, campaign_budget: float, vice_name=None) -> CandidateModel:
         """Añade un nuevo candidato a la base de datos."""
         new_candidate = CandidateModel(
             id=self.counter,
@@ -70,6 +74,7 @@ class Database:
             slogan=slogan,
             age=age,
             campaign_budget=campaign_budget,
+            vice_name=vice_name,
             created_at=datetime.now()
         )
         self.candidates.append(new_candidate)

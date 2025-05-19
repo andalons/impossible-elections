@@ -61,7 +61,8 @@ async def create_candidate(candidate: CandidateCreate):
         fictional_votes=candidate.fictional_votes,
         slogan=candidate.slogan,
         age=candidate.age,
-        campaign_budget=candidate.campaign_budget
+        campaign_budget=candidate.campaign_budget,
+        vice_name=candidate.vice_name
     )
     return new_candidate
 

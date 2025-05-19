@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 class CandidateModel:
     def __init__(self, id: int, name: str, party: str, main_proposal: str, 
                  populism_level: int, fictional_votes: int, slogan: str, 
-                 age: int, campaign_budget: float, created_at: datetime):
+                 age: int, campaign_budget: float, created_at: datetime, vice_name=None):
         self.id = id
         self.name = name
         self.party = party
@@ -15,6 +15,7 @@ class CandidateModel:
         self.slogan = slogan
         self.age = age
         self.campaign_budget = campaign_budget
+        self.vice_name = vice_name
         self.created_at = created_at or datetime.now(timezone.utc)
     
     def to_dict(self) -> Dict:
@@ -28,6 +29,7 @@ class CandidateModel:
             "slogan": self.slogan,
             "age": self.age,
             "campaign_budget": self.campaign_budget,
+            "vice_name": self.vice_name,
             "created_at": self.created_at.isoformat()
         }
     
@@ -43,5 +45,6 @@ class CandidateModel:
             slogan=data["slogan"],
             age=data["age"],
             campaign_budget=data["campaign_budget"],
+            vice_name=data.get("vice_name"),
             created_at=datetime.fromisoformat(data["created_at"]) if isinstance(data["created_at"], str) else data["created_at"]
         )
