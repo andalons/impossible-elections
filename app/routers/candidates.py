@@ -115,3 +115,13 @@ async def get_populism_stats():
         "min_populism": min(populism_levels),
         "total_candidates": len(candidates)
     }
+
+@router.get("/", ...)
+import random
+
+@router.get("/random", response_model=Candidate)
+async def get_random_candidate():
+    candidates = db.get_candidates()
+    if not candidates:
+        raise HTTPException(status_code=404, detail="No hay candidatos")
+    return random.choice(candidates)
