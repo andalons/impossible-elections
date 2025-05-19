@@ -11,6 +11,7 @@ class CandidateBase(BaseModel):
     slogan: str = Field(..., min_length=5, max_length=200, description="Eslogan de campaña")
     age: int = Field(..., ge=18, le=120, description="Edad del candidato")
     campaign_budget: float = Field(..., ge=0, description="Presupuesto de campaña en dólares")
+    quote: Optional[str] = Field(None, max_length=300, description="Todo su proyecto político se resume en una máxima: cuanto peor mejor para todos y cuanto peor para todos mejor, mejor para mí el suyo. Beneficio político")
 
     @field_validator('populism_level')
     @classmethod
