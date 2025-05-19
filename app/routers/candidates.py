@@ -15,6 +15,7 @@ router = APIRouter(
 async def get_candidates(
     name: Optional[str] = Query(None, description="Filtrar por nombre"),
     party: Optional[str] = Query(None, description="Filtrar por partido político"),
+    min_age: Optional[int] = Query(None, ge=18, description="Edad mínima del candidato"),
     min_populism: Optional[int] = Query(None, ge=0, le=100, description="Nivel mínimo de populismo"),
     max_populism: Optional[int] = Query(None, ge=0, le=100, description="Nivel máximo de populismo")
 ):
@@ -30,6 +31,9 @@ async def get_candidates(
     if party:
         candidates = [c for c in candidates if party.lower() in c.party.lower()]
     
+    if min_age is not None:
+        candidates = [c for c in candidates if c.age >= min_age]
+
     if min_populism is not None:
         candidates = [c for c in candidates if c.populism_level >= min_populism]
     
