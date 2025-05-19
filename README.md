@@ -153,3 +153,8 @@ async def get_random_candidate():
         raise HTTPException(status_code=404, detail="No hay candidatos")
     return random.choice(candidates)
 ```
+
+### Documentación:
+
+- https://medium.com/google-developer-experts/how-to-pull-request-d75ac81449a5
+- https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/creating-a-pull-request-template-for-your-repository
