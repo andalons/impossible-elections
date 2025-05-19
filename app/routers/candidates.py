@@ -16,13 +16,18 @@ async def get_candidates(
     name: Optional[str] = Query(None, description="Filtrar por nombre"),
     party: Optional[str] = Query(None, description="Filtrar por partido político"),
     min_populism: Optional[int] = Query(None, ge=0, le=100, description="Nivel mínimo de populismo"),
-    max_populism: Optional[int] = Query(None, ge=0, le=100, description="Nivel máximo de populismo")
+    max_populism: Optional[int] = Query(None, ge=0, le=100, description="Nivel máximo de populismo"),
+
+    min_budget: Optional[float] = Query(None, ge=0, description="Presupuesto mínimo")
+
 ):
+    
     """
     Obtiene la lista de todos los candidatos absurdos.
     Se pueden aplicar filtros opcionales.
     """
     candidates = db.get_candidates()
+    
     
     if name:
         candidates = [c for c in candidates if name.lower() in c.name.lower()]
@@ -35,6 +40,9 @@ async def get_candidates(
     
     if max_populism is not None:
         candidates = [c for c in candidates if c.populism_level <= max_populism]
+
+    if min_budget is not None:
+        candidates = [c for c in candidates if c.campaign_budget >= min_budget]
     
     return candidates
 
@@ -116,3 +124,4 @@ async def get_populism_stats():
         "min_populism": min(populism_levels),
         "total_candidates": len(candidates)
     }
+    
